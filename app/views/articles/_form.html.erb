@@ -10,7 +10,7 @@
     <br>
     <div>
       <%= form.label :body, :class => "form-label" %><br>
-      <%= form.text_area :body, :rows => 10, :class => "form-control" %><br>
+      <%= form.text_area :body, :row => 10, :class => "form-control" %><br>
       <% article.errors.full_messages_for(:body).each do |message| %>
         <div><%= message %></div>
       <% end %>
