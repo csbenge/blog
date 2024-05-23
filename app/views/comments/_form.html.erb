@@ -1,21 +1,31 @@
 <%= form_with model: [ @article, @article.comments.build ] do |form| %>
-    <p>
-      <%= form.label :commenter %><br>
-      <%= form.text_field :commenter %>
-    </p>
+
+    <div class="container-fluid text-start">
+      <%= form.label :commenter, :class => "form-label" %><br>
+      <%= form.text_field :commenter, :class => "form-control" %>
+    </div>
     
-    <p>
-      <%= form.label :body %><br>
-      <%= form.text_area :body %>
-    </p>
+    <br>
+    <div class="container-fluid text-start">
+      <%= form.label :body, :class => "form-label" %><br>
+      <%= form.text_area :body, :class => "form-control" %>
+    </div>
 
-    <p>
-        <%= form.label :status %><br>
-        <%= form.select :status, Visible::VALID_STATUSES, selected: 'public' %>
-    </p>
+    <br>
+    <div class="container-fluid text-start">
+      <div class="row">
+        <div class="col col-2">
+        <%= form.label :status, :class => "form-label" %>
+        </div>
+        <div class="col col-1">
+          <%= form.select :status, Visible::VALID_STATUSES, selected: 'public', :class => "form-control" %>
+        </div>
+      </div>
+    </div>
 
-    <p>
-      <%= form.submit %>
-    </p>
+    <hr>
+    <div class="container-fluid text-start">
+      <%= form.submit :class => "btn btn-primary btn-sm" %>
+    </div>
   <% end %>
   

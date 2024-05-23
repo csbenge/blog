@@ -1,33 +1,39 @@
-<h1>Articles</h1>
+<div class="container text-center">
+  <div class="card">
+    <h3 class="card-header">Articles</h3>
+    <div class="card-body">
+      <h6 class="card-title">Our blog has <%= Article.public_count %> articles and counting!</h6>
+      <%= link_to "New Article", new_article_path, :class => "btn btn-primary btn-sm" %>
+      <p class="card-text">
+        <table class="table table-striped">
+        <thead>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Body</th>
+          <th>Status</th>
+          <th>Comments</th>
+          <th>Created</th>
+          <th>Updated</th>
+        </thead>
 
-Our blog has <%= Article.public_count %> articles and counting!
-
-  <table>
-  <thead>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Body</th>
-    <th>Status</th>
-    <th>Created</th>
-    <th>Updated</th>
-  </thead>
-    
-  <% @articles.each do |article| %>
-    <% unless article.archived? %>
+        <% @articles.each do |article| %>
+          <% unless article.archived? %>
+            <tr>
+              <td><%= article.id %></td>
+              <td><%= link_to article.title, article %></td>
+              <td><%= article.body.first(20)... %></td>
+              <td><%= article.status %></td>
+              <td><%= article.comments.count %></td>
+              <td><%= article.created_at.strftime("%Y-%m-%d: %H:%M:%S") %></td>
+              <td><%= article.updated_at.strftime("%Y-%m-%d: %H:%M:%S") %></td>
+            </tr>
+          <% end %>
+        <% end %>
       
-      <tr>
-        <td><%= article.id %></td>
-        <td><%= link_to article.title, article %></td>
-        <td><%= article.body %></td>
-        <td><%= article.created_at.strftime("%Y %m %d") %></td>
-        <td><%= article.updated_at.strftime("%Y-%m-%d: %H:%M:%S") %></td>
-      </tr>
-      
-    <% end %>
-  <% end %>
-
-  <tbody>
-  </tbody>
-  </table>
-
-<%= link_to "New Article", new_article_path %>
+        <tbody>
+        </tbody>
+        </table>
+      </p>
+    </div>
+  </div>
+</div>

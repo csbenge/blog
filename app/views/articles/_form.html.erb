@@ -1,27 +1,35 @@
 <%= form_with model: article do |form| %>
     <div>
-      <%= form.label :title %><br>
-      <%= form.text_field :title %>
+      <%= form.label :title, :class => "form-label" %><br>
+      <%= form.text_field :title, :class => "form-control" %>
       <% article.errors.full_messages_for(:title).each do |message| %>
         <div><%= message %></div>
       <% end %>
     </div>
   
+    <br>
     <div>
-      <%= form.label :body %><br>
-      <%= form.text_area :body %><br>
+      <%= form.label :body, :class => "form-label" %><br>
+      <%= form.text_area :body, :rows => 10, :class => "form-control" %><br>
       <% article.errors.full_messages_for(:body).each do |message| %>
         <div><%= message %></div>
       <% end %>
     </div>
 
-    <div>
-        <%= form.label :status %><br>
-        <%= form.select :status, Visible::VALID_STATUSES, selected: article.status || 'public' %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col col-1">
+          <%= form.label :status %>
+        </div>
+        <div class="col col-1">
+          <%= form.select :status, Visible::VALID_STATUSES, selected: article.status || 'public', :class => "form-control" %>
+        </div>
+      </div>
     </div>
 
+    <br>
     <div>
-      <%= form.submit %>
+      <%= form.submit :class => "btn btn-primary btn-sm" %>
     </div>
   <% end %>
   
