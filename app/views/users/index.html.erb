@@ -1,0 +1,36 @@
+
+<div class="container text-center">
+  <div class="card">
+    <h3 class="card-header">Users</h3>
+    <div class="card-body">
+      <h6 class="card-title">Our blog has <%= User.count %> users and counting!</h6>
+      <%= link_to "New User", new_user_path, :class => "btn btn-primary btn-sm" %>
+      <p class="card-text">
+        <table class="table table-striped">
+        <thead>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Created</th>
+          <th>Updated</th>
+        </thead>
+
+        <% @users.each do |user| %>
+         
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= link_to user.name, user %></td>
+              <td><%= user.email %></td>
+              <td><%= user.created_at.strftime("%Y-%m-%d: %H:%M:%S") %></td>
+              <td><%= user.updated_at.strftime("%Y-%m-%d: %H:%M:%S") %></td>
+            </tr>
+         
+        <% end %>
+      
+        <tbody>
+        </tbody>
+        </table>
+      </p>
+    </div>
+  </div>
+</div>
