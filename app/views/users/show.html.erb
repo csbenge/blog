@@ -1,26 +1,64 @@
 
-<div class="container text-center">
+
+<div class="container-fluid text-center">
   <div class="row">
-    <div class="col col-3"></div>
-
-    <div class="col col-6">
-
-        <div class="card">
-        <h3 class="card-header"><%= @user.name %></h3>
-        <div class="card-body">
-            <div class="container text-start">
-            <p class="card-text">
-                ID:      <%= @user.id %><br>
-                Name:    <%= @user.name %><br>
-                Email:   <%= @user.email %><br>
-                Sign Up: <%= @user.created_at %>
-            </p>
-            </div>
-            </div>
+    <div class="col col-4">
+    <div class="card">
+    <h3 class="card-header"><%= @user.name %></h3>
+    <div class="card-body">
+        <div class="container text-start">
+        <p class="card-text">
+            ID:         <%= @user.id %><br>
+            Name:       <%= @user.name %><br>
+            Email:      <%= @user.email %><br>
+            Sign Up:    <%= @user.created_at %><br>
+            Articles:   <%= @user.articles.count %>
+        </p>
         </div>
-
+        </div>
     </div>
-    <div class="col col-3"></div>
+  
+    
   </div>
-</div>
 
+  <div class="col col-8">
+    <div class="card">
+      <h3 class="card-header">Articles</h3>
+      <div class="card-body">
+      <h6 class="card-title">You have posted <%= Article.public_count %> articles and counting!</h6>
+      <%= link_to "New Article", new_article_path, :class => "btn btn-primary btn-sm" %>
+      <p class="card-text">
+        <table class="table table-striped">
+        <thead>
+         
+          <th>Title</th>
+          <th>Body</th>
+          <th>Status</th>
+          <th>Comments</th>
+          <th>Created</th>
+          
+        </thead>
+
+        <% @articles.each do |article| %>
+          <% unless article.archived? %>
+            <tr>
+             
+              <td><%= link_to article.title, article %></td>
+              <td><%= article.body.first(20)... %></td>
+              <td><%= article.status %></td>
+              <td><%= article.comments.count %></td>
+              <td><%= article.created_at.strftime("%Y-%m-%d: %H:%M:%S") %></td>
+             
+            </tr>
+          <% end %>
+        <% end %>
+      
+        <tbody>
+        </tbody>
+        </table>
+      </p>
+      </div>
+    </div>
+  </div>
+
+</div>
