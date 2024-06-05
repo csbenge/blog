@@ -7,15 +7,21 @@
     <h3 class="card-header"><%= @user.name %></h3>
     <div class="card-body">
         <div class="container text-start">
-        <p class="card-text">
+          <p class="card-text">
             ID:         <%= @user.id %><br>
             Name:       <%= @user.name %><br>
             Email:      <%= @user.email %><br>
-            Sign Up:    <%= @user.created_at %><br>
+            Sign Up:    <%= @user.created_at.strftime("%Y-%m-%d: %H:%M:%S") %><br>
             Articles:   <%= @user.articles.count %>
-        </p>
+          </p>
         </div>
-        </div>
+        <% if current_user.id == @user.id %>
+          <div class="text-start">
+            <hr>
+            <%= link_to "Edit Profile", edit_user_path(@user), :class => "btn btn-primary btn-sm" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   
     
@@ -25,30 +31,30 @@
     <div class="card">
       <h3 class="card-header">Articles</h3>
       <div class="card-body">
-      <h6 class="card-title">You have posted <%= Article.public_count %> articles and counting!</h6>
-      <%= link_to "New Article", new_article_path, :class => "btn btn-primary btn-sm" %>
+      <h6 class="card-title"><%= @user.name %> has posted <%= @articles.public_count %> articles and counting!</h6>
+      <% if current_user.id == @user.id %>
+        <%= link_to "New Article", new_article_path, :class => "btn btn-primary btn-sm" %>
+      <% end %>
       <p class="card-text">
         <table class="table table-striped">
         <thead>
-         
           <th>Title</th>
           <th>Body</th>
           <th>Status</th>
           <th>Comments</th>
           <th>Created</th>
-          
+          <th>Updated</th>
         </thead>
 
         <% @articles.each do |article| %>
           <% unless article.archived? %>
             <tr>
-             
               <td><%= link_to article.title, article %></td>
               <td><%= article.body.first(20)... %></td>
               <td><%= article.status %></td>
               <td><%= article.comments.count %></td>
               <td><%= article.created_at.strftime("%Y-%m-%d: %H:%M:%S") %></td>
-             
+              <td><%= article.updated_at.strftime("%Y-%m-%d: %H:%M:%S") %></td>
             </tr>
           <% end %>
         <% end %>

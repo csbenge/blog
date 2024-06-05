@@ -1,14 +1,13 @@
 <div class="container text-center">
   <div class="card">
-    <h3 class="card-header">Articles</h3>
+    <h4 class="card-header">Articles</h4>
     <div class="card-body">
       <h6 class="card-title">Our blog has <%= Article.public_count %> articles and counting!</h6>
-      <%= link_to "New Article", new_article_path, :class => "btn btn-primary btn-sm" %>
       <p class="card-text">
         <table class="table table-striped">
-        <thead>
+        <thead class="table-secondary">
           <th>ArticleID</th>
-          <th>UserID</th>
+          <th>Author</th>
           <th>Title</th>
           <th>Body</th>
           <th>Status</th>
@@ -21,7 +20,8 @@
           <% unless article.archived? %>
             <tr>
               <td><%= article.id %></td>
-              <td><%= article.user_id %></td>
+              
+              <td><%= link_to getArticleUserName(article.user_id), getArticleUser(article.user_id) %></td>
               <td><%= link_to article.title, article %></td>
               <td><%= article.body.first(20)... %></td>
               <td><%= article.status %></td>

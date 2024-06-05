@@ -2,7 +2,7 @@
 
     <div class="container-fluid text-start">
       <%= form.label :commenter, :class => "form-label" %><br>
-      <%= form.text_field :commenter, :class => "form-control" %>
+      <%= form.text_field :commenter, :class => "form-control", :value => current_user.name, :readonly => true %>
     </div>
     
     <br>

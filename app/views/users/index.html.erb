@@ -1,13 +1,12 @@
 
 <div class="container text-center">
   <div class="card">
-    <h3 class="card-header">Users</h3>
+    <h4 class="card-header">Users</h4>
     <div class="card-body">
       <h6 class="card-title">Our blog has <%= User.count %> users and counting!</h6>
-      <%= link_to "New User", new_user_path, :class => "btn btn-primary btn-sm" %>
       <p class="card-text">
         <table class="table table-striped">
-        <thead>
+        <thead class="table-secondary">
           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
