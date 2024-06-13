@@ -1,26 +1,28 @@
 
-
 <div class="container-fluid text-center">
   <div class="row">
     <div class="col col-4">
-    <div class="card">
-    <h3 class="card-header"><%= @user.name %></h3>
-    <div class="card-body">
-        <div class="container text-start">
-          <p class="card-text">
-            ID:         <%= @user.id %><br>
-            Name:       <%= @user.name %><br>
-            Email:      <%= @user.email %><br>
-            Sign Up:    <%= @user.created_at.strftime("%Y-%m-%d: %H:%M:%S") %><br>
-            Articles:   <%= @user.articles.count %>
-          </p>
-        </div>
-        <% if current_user.id == @user.id %>
-          <div class="text-start">
-            <hr>
-            <%= link_to "Edit Profile", edit_user_path(@user), :class => "btn btn-primary btn-sm" %>
+    <div class="card text-bg-secondary">
+      <h4 class="card-header"><%= @user.name %></h4>
+      <div class="card-body">
+          <div class="container text-start">
+            <p class="card-text">
+              ID:         <%= @user.id %><br>
+              Name:       <%= @user.name %><br>
+              Email:      <%= @user.email %><br>
+              Sign Up:    <%= @user.created_at.strftime("%Y-%m-%d: %H:%M:%S") %><br>
+              Articles:   <%= @user.articles.count %>
+            </p>
           </div>
-        <% end %>
+            <% if current_user.id == @user.id %>
+              <div class="text-start">
+                <hr>
+                <%= link_to "Edit Account", edit_user_path(@user), :class => "btn btn-primary btn-sm" %>
+                <%= link_to "Cancel Account", @user, data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Really Cancel Your Account? There is no undo." }, :class => "btn btn-danger btn-sm" %>
+              </div>
+            <% end %>
       </div>
     </div>
   
@@ -28,8 +30,8 @@
   </div>
 
   <div class="col col-8">
-    <div class="card">
-      <h3 class="card-header">Articles</h3>
+    <div class="card text-bg-secondary">
+      <h4 class="card-header">My Articles</h4>
       <div class="card-body">
       <h6 class="card-title"><%= @user.name %> has posted <%= @articles.public_count %> articles and counting!</h6>
       <% if current_user.id == @user.id %>

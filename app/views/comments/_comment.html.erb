@@ -1,17 +1,19 @@
 <% unless comment.archived? %>
 
-  <% if comment.commenter %>
+  <% if comment.user_id %>
     <tr>
       <td><%= comment.id %></td>
-      <td><%= comment.commenter %></td>
+      <td><%= getCommentUserName(comment.user_id) %></td>
       <td><%= comment.body %></td>
       <td><%= comment.status %></td>
       <td><%= comment.created_at.strftime("%Y-%m-%d: %H:%M:%S") %></td>
       <td>
-        <%= link_to "Delete", [comment.article, comment], data: {
+        <% if comment.user_id == current_user.id %>
+          <%= link_to "Delete", [comment.article, comment], data: {
               turbo_method: :delete,
               turbo_confirm: "Delete Comment?"
             }, :class => "btn btn-primary btn-sm" %>
+        <% end %>
       </td>
     </tr>
   <% end %>

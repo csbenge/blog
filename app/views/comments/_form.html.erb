@@ -1,13 +1,8 @@
 <%= form_with model: [ @article, @article.comments.build ] do |form| %>
 
+    <%= form.hidden_field :user_id, :class => "form-control", :value => current_user.id, :readonly => true, :style => 'display:none' %>
+   
     <div class="container-fluid text-start">
-      <%= form.label :commenter, :class => "form-label" %><br>
-      <%= form.text_field :commenter, :class => "form-control", :value => current_user.name, :readonly => true %>
-    </div>
-    
-    <br>
-    <div class="container-fluid text-start">
-      <%= form.label :body, :class => "form-label" %><br>
       <%= form.text_area :body, :class => "form-control" %>
     </div>
 
